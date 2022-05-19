@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED=1 \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
   POETRY_HOME="/opt/poetry" \
   POETRY_VIRTUALENVS_IN_PROJECT=true \
-  POETRY_VERSION="1.1.12" \
+  POETRY_VERSION="1.1.13" \
   POETRY_NO_INTERACTION=1 \
   PYSETUP_PATH="/opt/service" \
   VENV_PATH="/opt/service/.venv"
@@ -21,7 +21,7 @@ ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 FROM base as builder-image
 
 COPY ./scripts $PYSETUP_PATH/scripts
-RUN chmod +x $PYSETUP_PATH/scripts/install-build-packages.sh $PYSETUP_PATH/scripts/install-runtime-packages.sh
+RUN chmod +x $PYSETUP_PATH/scripts/install-build-packages.sh
 RUN $PYSETUP_PATH/scripts/install-build-packages.sh
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -43,7 +43,6 @@ RUN poetry install $POETRY_OPTIONS
 # Copy the builded files to a fresh image
 FROM base as runtime-image
 COPY --from=builder-image $PYSETUP_PATH $PYSETUP_PATH
-RUN $PYSETUP_PATH/scripts/install-runtime-packages.sh
 WORKDIR $PYSETUP_PATH
 
 CMD ["/bin/bash", "/opt/service/scripts/pre-start.sh"]
