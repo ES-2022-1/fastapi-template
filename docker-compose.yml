@@ -22,7 +22,7 @@ services:
       - .env
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=postgres_test
     ports:
       - 5432:5432
 
