@@ -26,8 +26,5 @@ def test_create_todo(session, todo_client):
     }
     response = todo_client.create(json.dumps(data))
 
-    print("cheguei aqui")
     assert response.status_code == 200
-
-
-# assert response.json()["description"] == data["D1"]
+    assert response.json()["description"] == "string"

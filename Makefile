@@ -18,7 +18,7 @@ test:
 	poetry run pytest $(file)
 
 test-docker:
-	docker compose run --rm server pytest $(file)
+	 docker compose up -d --build && docker compose run --rm server pytest $(file)
 
 test-cov:
 	poetry run pytest \
