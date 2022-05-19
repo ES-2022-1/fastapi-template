@@ -43,6 +43,7 @@ RUN poetry install $POETRY_OPTIONS
 # Copy the builded files to a fresh image
 FROM base as runtime-image
 COPY --from=builder-image $PYSETUP_PATH $PYSETUP_PATH
+COPY ./tests/ $PYSETUP_PATH/tests
 WORKDIR $PYSETUP_PATH
 
 CMD ["/bin/bash", "/opt/service/scripts/pre-start.sh"]

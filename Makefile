@@ -17,6 +17,9 @@ update:
 test:
 	poetry run pytest $(file)
 
+test-docker:
+	docker compose run --rm server pytest $(file)
+
 test-cov:
 	poetry run pytest \
 		--cov-report html \
