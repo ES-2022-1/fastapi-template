@@ -1,11 +1,11 @@
 from typing import Optional
 from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class TodoBase(BaseModel):
-    description: str = Field(max_length=50)
+    description: str
 
 
 class TodoCreate(TodoBase):
@@ -20,4 +20,4 @@ class TodoView(TodoBase):
 
 
 class TodoUpdate(BaseModel):
-    description: Optional[str] = Field(max_length=50)
+    description: Optional[str]
