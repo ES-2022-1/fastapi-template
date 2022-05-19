@@ -20,7 +20,7 @@ def todo(make_todo):
     return make_todo()
 
 
-def test_create_todo(session, todo_client):
+def test_create_todo(todo_client):
     data = {
         "description": "string",
     }
@@ -28,3 +28,20 @@ def test_create_todo(session, todo_client):
 
     assert response.status_code == 200
     assert response.json()["description"] == "string"
+
+
+@pytest.mark.parametrize(
+    "field,expected_field",
+    [
+        ("description", "new_description"),
+    ],
+)
+def test_update_todo(todo, session, todo_client, field, expected_field):
+    session.add(todo)
+    session.commit()
+
+    data = {field: expected_field}
+
+    response = todo_client.update(id=todo.id_todo, update=json.dumps(data))
+    assert response.status_code == 200
+    assert response.json()[field] == expected_field
