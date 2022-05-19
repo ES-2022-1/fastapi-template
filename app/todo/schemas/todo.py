@@ -1,4 +1,5 @@
 from typing import Optional
+from uuid import UUID
 
 from pydantic import BaseModel, Field
 
@@ -12,7 +13,7 @@ class TodoCreate(TodoBase):
 
 
 class TodoView(TodoBase):
-    ...
+    id_todo: UUID
 
     class Config:
         orm_mode = True
