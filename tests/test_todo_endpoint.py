@@ -45,3 +45,13 @@ def test_update_todo(todo, session, todo_client, field, expected_field):
     response = todo_client.update(id=todo.id_todo, update=json.dumps(data))
     assert response.status_code == 200
     assert response.json()[field] == expected_field
+
+
+def test_delete_todo(todo, session, todo_client):
+    session.add(todo)
+    session.commit()
+
+    todo_client.delete(id=todo.id_todo)
+    response = todo_client.get_by_id(id=todo.id_todo)
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Todo not found"
