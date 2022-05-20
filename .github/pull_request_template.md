@@ -1,20 +1,18 @@
-<!--- You can modify it as per your needs. -->
+<!--- Você pode moficar de acordo com as suas necessidades. -->
 
-#### What was done in this Pull Request?
+#### O que foi feito nessa Pull Request?
 
-<!--- Describe your changes in detail -->
+<!--- Descreva suas alterações em detalhes -->
 
-#### Why do it?
+#### Porque fazer isso??
 
-<!-- Maybe, enter the issue you are resolving,
-describe the motivation and context of this change -->
+<!-- Se existir, insira o número da issue que você está resolvendo,
+descreva as modificações e os motivos das mesmas -->
 
-#### Testing and evidence
+#### Testes e evidências
 
-<!--- show how testing was performed and/or evidence of its change,
-such as screenshots, data snapshots, etc... -->
+<!--- Mostre como testar e mostre as evidências de que está funcionando. -->
 
-#### Next steps
+#### Próximos passos
 
-<!--- any dependencies for the change to go upstream or activities
-that need to be done after PR -->
+<!--- Alguma dependencia upstream -->

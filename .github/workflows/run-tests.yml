@@ -74,14 +74,3 @@ jobs:
           set -o pipefail
           source .venv/bin/activate
           pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app tests/ | tee pytest-coverage.txt
-
-      - name: Generate coverage annotations
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: scripts/annotate-coverage/entrypoint.sh
-
-      - name: Generate coverage comments
-        uses: MishaKav/pytest-coverage-comment@f6ab1101b9ec684db85018b334d91c988ddfb715 # pin@v1.1.19
-        with:
-          pytest-coverage-path: ./pytest-coverage.txt
-          junitxml-path: ./pytest.xml
