@@ -55,3 +55,22 @@ def test_delete_todo(todo, session, todo_client):
     response = todo_client.get_by_id(id=todo.id_todo)
     assert response.status_code == 404
     assert response.json()["detail"] == "Todo not found"
+
+
+def test_get_todo_by_id(todo, session, todo_client):
+    session.add(todo)
+    session.commit()
+    response = todo_client.get_by_id(id=todo.id_todo)
+
+    assert response.status_code == 200
+    assert response.json()["id_todo"] == str(todo.id_todo)
+    assert response.json()["description"] == str(todo.description)
+
+
+def test_list_todo(todo, session, todo_client):
+    session.add(todo)
+    session.commit()
+    response = todo_client.get_all()
+
+    assert response.status_code == 200
+    assert len(response.json()) == 1

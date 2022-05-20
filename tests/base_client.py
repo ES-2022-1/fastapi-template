@@ -15,7 +15,7 @@ class BaseClient:
     def get_by_id(self, id: UUID):
         return self.client.get(f"/{self.path}/{str(id)}", headers=self.headers)
 
-    def get_paginated(self):
+    def get_all(self):
         return self.client.get(f"/{self.path}/", headers=self.headers)
 
     def create(self, create):
