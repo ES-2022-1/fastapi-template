@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/opt/service/app
+      - ./migrations:/opt/service/migrations
+    command: bash -c "/opt/service/scripts/pre-start.sh && uvicorn app.main:app --host 0.0.0.0 --reload"
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+
+volumes:
+    postgres_data:
