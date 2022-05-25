@@ -10,11 +10,11 @@ from sqlalchemy.orm.session import Session
 from sqlalchemy_utils import create_database, database_exists
 
 from app.api.deps import get_db
-from app.core.settings import SQLALCHEMY_DATABASE_URL
 from app.main import app
 from tests.factories import make_todo  # noqa: F401
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+database_url = "postgresql://postgres:postgres@db:5432/postgres_test"
+engine = create_engine(database_url)
 
 
 @pytest.fixture()
@@ -31,7 +31,7 @@ def session():
     config = Config(file_=alembic_ini)
 
     config.set_main_option("script_location", script_location)
-    config.set_main_option("sqlalchemy.url", SQLALCHEMY_DATABASE_URL)
+    config.set_main_option("sqlalchemy.url", database_url)
 
     # drop everything
     # command.downgrade(config, "base")

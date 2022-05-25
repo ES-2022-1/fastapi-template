@@ -18,7 +18,7 @@ test:
 	poetry run pytest $(file)
 
 test-docker:
-	 docker compose up -d --build && docker compose run --rm server pytest $(file)
+	docker compose run --rm server pytest $(file)
 
 test-cov:
 	poetry run pytest \
@@ -26,6 +26,10 @@ test-cov:
 		--cov-report xml:cov.xml \
 		--cov-report term-missing \
 		--cov=app
+
+
+docker-alembic-revision:
+	docker compose run server alembic revision --autogenerate -m $(m)
 
 lint:
 	poetry run pre-commit run --all-files
