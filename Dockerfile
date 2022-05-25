@@ -46,4 +46,6 @@ COPY --from=builder-image $PYSETUP_PATH $PYSETUP_PATH
 COPY ./tests/ $PYSETUP_PATH/tests
 WORKDIR $PYSETUP_PATH
 
+RUN useradd user -u 1000
+USER user
 CMD ["/bin/bash", "/opt/service/scripts/pre-start.sh"]
